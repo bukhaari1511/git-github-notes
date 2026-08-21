@@ -1,3 +1,32 @@
+ name: Check Project
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required files
+        run: |
+          test -f README.md
+          test -f .gitignore
+          test -d notes
+          test -f notes/01-introduction-to-git-and-github.md
+          test -f notes/02-git-basics.md
+          test -f notes/03-branching.md
+          test -f notes/04-remote-repositories.md
+          test -f notes/05-collaboration-with-github.md
+          test -f notes/06-pull-requests-and-code-reviews.md
+          test -f notes/07-gitignore-and-project-organization.md
+          test -f notes/08-open-source-workflows.md
+          test -f notes/09-github-actions-introduction.md
+
       - name: Check lesson count
         shell: bash
         run: |
@@ -7,3 +36,6 @@
             exit 1
           fi
           echo "Found all 9 lesson notes."
+
+      - name: Project check passed
+        run: echo "All required project files are present."
