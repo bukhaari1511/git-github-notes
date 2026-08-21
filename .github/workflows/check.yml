@@ -1,0 +1,9 @@
+      - name: Check lesson count
+        shell: bash
+        run: |
+          count=$(find notes -maxdepth 1 -name "*.md" | wc -l)
+          if [ "$count" -ne 9 ]; then
+            echo "Expected 9 lesson notes, found $count"
+            exit 1
+          fi
+          echo "Found all 9 lesson notes."
